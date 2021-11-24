@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-k8s-frontend-service
+  namespace: simple-k8s
+  labels:
+    svc: simple-k8s-frontend-service
+spec:
+  selector:
+    app: simple-k8s-frontend
+  ports:
+  - port: 4000
+    targetPort: 4000
+  type: LoadBalancer

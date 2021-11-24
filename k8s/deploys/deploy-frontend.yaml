@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-k8s-frontend-deploy
+  namespace: simple-k8s
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: simple-k8s-frontend
+  template:
+    metadata:
+      labels:
+        app: simple-k8s-frontend
+    spec:
+      containers:
+      - name: simple-k8s-frontend
+        image: simple-k8s-frontend
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 4000
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: BACKEND
+            value: simple-k8s-backend-service
