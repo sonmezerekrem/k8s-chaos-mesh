@@ -1,0 +1,18 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: DNSChaos
+metadata:
+  name: dns
+  namespace: chaos-tests
+  labels:
+    chaos-mesh: dns
+    dns: dns
+spec:
+  action: random
+  mode: all
+  patterns:
+    - simple-k8s-backend-service
+  selector:
+    namespaces:
+    - simple-k8s
+    labelSelectors:
+      'app': 'simple-k8s-frontend'

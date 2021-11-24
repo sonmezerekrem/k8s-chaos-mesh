@@ -1,0 +1,20 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: IOChaos
+metadata:
+  name: fileio-fault
+  namespace: chaos-tests
+  labels:
+    chaos-mesh: fileio
+    fileio: fault
+spec:
+  action: fault
+  mode: one
+  duration: 60s
+  selector:
+    namespaces:
+    - simple-k8s
+    labelSelectors:
+      'app': 'simple-k8s-backend'
+  volumePath: /usr/src/app/fileio
+  errno: 5
+  percent: 50

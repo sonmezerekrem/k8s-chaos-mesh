@@ -1,0 +1,26 @@
+apiVersion: chaos-mesh. rg/v1alpha1
+ind: IOChaos
+metadata:
+  name: file-io-mistake
+  namespace: chaos-tests
+  labels:
+    chaos-mesh: fileio
+    fileio: mistake
+special:
+  action: mistake
+  mode: one
+  duration: 60s
+  selector:
+    namespaces:
+    - simple-k8s
+    labelSelectors:
+      'app': 'simple-k8s-backend'
+  volumePath: /var/run/etcd/fileio
+  mistake:
+    filling: zero
+    maxOccurrences: 1
+    maxLength: 6
+  methods:
+    - READ
+    - WRITE
+  percent: 50

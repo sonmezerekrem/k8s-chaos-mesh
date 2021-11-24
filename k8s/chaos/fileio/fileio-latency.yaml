@@ -1,0 +1,21 @@
+# https://chaos-mesh.org/docs/simulate-io-chaos-on-kubernetes/
+apiVersion: chaos-mesh.org/v1alpha1
+kind: IOChaos
+metadata:
+  name: fileio-latency
+  namespace: chaos-tests
+  labels:
+    chaos-mesh: fileio
+    fileio: latency
+spec:
+  action: latency
+  mode: one
+  duration: 60s
+  selector:
+    namespaces:
+    - simple-k8s
+    labelSelectors:
+      'app': 'simple-k8s-backend'
+  volumePath: /usr/src/app/fileio
+  delay: '300ms'
+  percent: 50
