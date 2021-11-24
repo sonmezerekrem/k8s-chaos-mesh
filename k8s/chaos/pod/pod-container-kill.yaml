@@ -1,0 +1,20 @@
+# https://chaos-mesh.org/docs/simulate-pod-chaos-on-kubernetes/
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: pod-container-kill
+  namespace: chaos-tests
+  labels:
+    chaos-mesh: pod
+    pod: container-kill
+spec:
+  action: container-kill
+  mode: fixed
+  value: 2
+  duration: 120s
+  containerNames: ['simple-k8s-backend']
+  selector:
+    namespaces:
+    - simple-k8s
+    labelSelectors:
+      'app': 'simple-k9s-backend'

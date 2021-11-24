@@ -1,0 +1,22 @@
+# https://chaos-mesh.org/docs/simulate-network-chaos-on-kubernetes/
+# open to bugs, need testing
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-reorder
+  namespace: chaos-tests
+  labels:
+    chaos-mesh: network
+    network: reorder
+spec:
+  action: reorder
+  mode: one
+  duration: 60s
+  selector:
+    namespaces:
+      - simple-k8s
+    labelSelectors:
+      'app': 'simple-k8s-backend'
+  reorder: 0.5
+  correlation: 0.5
+  gap: 5
