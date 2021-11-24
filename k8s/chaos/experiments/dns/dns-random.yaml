@@ -1,14 +1,16 @@
+# https://chaos-mesh.org/docs/simulate-dns-chaos-on-kubernetes/
 apiVersion: chaos-mesh.org/v1alpha1
 kind: DNSChaos
 metadata:
-  name: dns
+  name: dns-random
   namespace: chaos-tests
   labels:
     chaos-mesh: dns
-    dns: dns
+    dns: random
 spec:
   action: random
   mode: all
+  duration: 120s
   patterns:
     - simple-k8s-backend-service
   selector:

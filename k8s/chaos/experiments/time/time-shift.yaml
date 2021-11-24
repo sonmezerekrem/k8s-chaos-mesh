@@ -1,0 +1,18 @@
+# https://chaos-mesh.org/docs/simulate-time-chaos-on-kubernetes/
+apiVersion: chaos-mesh.org/v1alpha1
+kind: TimeChaos
+metadata:
+  name: time-shift
+  namespace: chaos-tests
+  labels:
+    chaos-mesh: time
+    time: shift
+spec:
+  mode: one
+  duration: 120s
+  selector:
+    namespaces:
+    - simple-k8s
+    labelSelectors:
+      'app': 'simple-k8s-backend'
+  timeOffset: '-10m100ns'

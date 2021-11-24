@@ -10,6 +10,7 @@ metadata:
 spec:
   action: bandwidth
   mode: all
+  duration: 120s
   selector:
     namespaces:
       - simple-k8s
