@@ -1,0 +1,27 @@
+# https://chaos-mesh.org/docs/define-scheduling-rules/
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: network-schedule
+  namespace: chaos-tests
+  labels:
+    chaos-mesh: schedule
+    schedule: network
+spec:
+  schedule: '5 * * * *'
+  historyLimit: 10
+  concurrencyPolicy: 'Allow'
+  type: 'NetworkChaos'
+  networkChaos:
+    action: delay
+    mode: one
+    selector:
+      namespaces:
+        - simple-k8s
+      labelSelectors:
+        'app': 'simple-k8s-backend'
+      delay:
+        latency: '500ms'
+        correlation: '100'
+        jitter: '0ms'
+    duration: 60s

@@ -1,0 +1,23 @@
+# https://chaos-mesh.org/docs/define-scheduling-rules/
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: pod-schedule
+  namespace: chaos-tests
+  labels:
+    chaos-mesh: schedule
+    schedule: pod
+spec:
+  schedule: '10 * * * *'
+  historyLimit: 10
+  concurrencyPolicy: 'Allow'
+  type: 'PodChaos'
+  podChaos:
+    action: pod-kill
+    mode: one
+    duration: 60s
+    selector:
+      namespaces:
+        - simple-k8s
+      labelSelectors:
+        'app': 'simple-k8s-backend'
